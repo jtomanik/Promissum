@@ -201,8 +201,8 @@ internal func callHandlers<T>(value: T, handlers: [(T) -> Void], dispatchMethod:
       handler(value)
 
     case let .OnQueue(targetQueue):
-      let currentQueueLabel = String(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL))
-      let targetQueueLabel = String(dispatch_queue_get_label(targetQueue))
+      let currentQueueLabel = String(validatingUTF8: dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL))!
+      let targetQueueLabel = String(validatingUTF8: dispatch_queue_get_label(targetQueue))!
 
       // Assume on correct queue if labels match, but be conservative if label is empty
       let alreadyOnQueue = currentQueueLabel == targetQueueLabel && currentQueueLabel != ""
