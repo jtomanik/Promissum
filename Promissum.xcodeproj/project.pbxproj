@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+    archiveVersion = 1;
+    classes = {};
+    objectVersion = 46;
+    rootObject = __RootObject_;
+    objects = {
+        __RootObject_ = {
+            isa = PBXProject;
+            attributes = {LastUpgradeCheck = 9999;};
+            buildConfigurationList = ___RootConfs_;
+            compatibilityVersion = 'Xcode 3.2';
+            developmentRegion = English;
+            hasScannedForEncodings = 0;
+            knownRegions = (en);
+            mainGroup = ___RootGroup_;
+            productRefGroup = ____Products_;
+            projectDirPath = '';
+            projectRoot = '';
+            targets = (______Target_Promissum, ______Target_PromissumTestSuite);
+        };
+        '__PBXFileRef_Package.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'Package.swift';
+            path = 'Package.swift';
+            sourceTree = '<group>';
+        };
+        ___RootGroup_ = {
+            isa = PBXGroup;
+            children = ('__PBXFileRef_Package.swift', _____Configs_, _____Sources_, Dependencies_, _______Tests_, ____Products_);
+            sourceTree = '<group>';
+        };
+        __PBXFileRef_Promissum_Info.plist = {
+            isa = PBXFileReference;
+            lastKnownFileType = text.plist.xml;
+            name = 'Promissum_Info.plist';
+            path = 'Promissum.xcodeproj/Promissum_Info.plist';
+            sourceTree = SOURCE_ROOT;
+        };
+        _______Group_Promissum = {
+            isa = PBXGroup;
+            name = Promissum;
+            path = 'Sources/Promissum';
+            sourceTree = '<group>';
+            children = ('__PBXFileRef_Sources/Promissum/Combinators.swift', '__PBXFileRef_Sources/Promissum/Delay+Promise.swift', '__PBXFileRef_Sources/Promissum/DispatchMethod.swift', '__PBXFileRef_Sources/Promissum/Promise.swift', '__PBXFileRef_Sources/Promissum/PromiseSource.swift', '__PBXFileRef_Sources/Promissum/Result.swift', '__PBXFileRef_Sources/Promissum/State.swift', __PBXFileRef_Promissum_Info.plist);
+        };
+        '__PBXFileRef_Sources/Promissum/Combinators.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'Combinators.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Sources/Promissum/Delay+Promise.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'Delay+Promise.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Sources/Promissum/DispatchMethod.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'DispatchMethod.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Sources/Promissum/Promise.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'Promise.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Sources/Promissum/PromiseSource.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'PromiseSource.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Sources/Promissum/Result.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'Result.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Sources/Promissum/State.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'State.swift';
+            sourceTree = '<group>';
+        };
+        ______Target_Promissum = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = _______Confs_Promissum;
+            buildPhases = (CompilePhase_Promissum, ___LinkPhase_Promissum);
+            buildRules = ();
+            dependencies = ();
+            name = Promissum;
+            productName = Promissum;
+            productReference = _____Product_Promissum;
+            productType = 'com.apple.product-type.framework';
+        };
+        _____Product_Promissum = {
+            isa = PBXFileReference;
+            explicitFileType = 'wrapper.framework';
+            path = 'Promissum.framework';
+            sourceTree = BUILT_PRODUCTS_DIR;
+        };
+        CompilePhase_Promissum = {
+            isa = PBXSourcesBuildPhase;
+            files = ('__src_cc_ref_Sources/Promissum/Combinators.swift', '__src_cc_ref_Sources/Promissum/Delay+Promise.swift', '__src_cc_ref_Sources/Promissum/DispatchMethod.swift', '__src_cc_ref_Sources/Promissum/Promise.swift', '__src_cc_ref_Sources/Promissum/PromiseSource.swift', '__src_cc_ref_Sources/Promissum/Result.swift', '__src_cc_ref_Sources/Promissum/State.swift');
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        '__src_cc_ref_Sources/Promissum/Combinators.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Sources/Promissum/Combinators.swift';
+        };
+        '__src_cc_ref_Sources/Promissum/Delay+Promise.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Sources/Promissum/Delay+Promise.swift';
+        };
+        '__src_cc_ref_Sources/Promissum/DispatchMethod.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Sources/Promissum/DispatchMethod.swift';
+        };
+        '__src_cc_ref_Sources/Promissum/Promise.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Sources/Promissum/Promise.swift';
+        };
+        '__src_cc_ref_Sources/Promissum/PromiseSource.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Sources/Promissum/PromiseSource.swift';
+        };
+        '__src_cc_ref_Sources/Promissum/Result.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Sources/Promissum/Result.swift';
+        };
+        '__src_cc_ref_Sources/Promissum/State.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Sources/Promissum/State.swift';
+        };
+        ___LinkPhase_Promissum = {
+            isa = PBXFrameworksBuildPhase;
+            files = ();
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        _______Confs_Promissum = {
+            isa = XCConfigurationList;
+            buildConfigurations = (___DebugConf_Promissum, _ReleaseConf_Promissum);
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Debug;
+        };
+        ___DebugConf_Promissum = {
+            isa = XCBuildConfiguration;
+            buildSettings = { LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Promissum.xcodeproj/Promissum_Info.plist'; SWIFT_OPTIMIZATION_LEVEL = '-Onone'; OTHER_LDFLAGS = '$(inherited)'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; };
+            name = Debug;
+        };
+        _ReleaseConf_Promissum = {
+            isa = XCBuildConfiguration;
+            buildSettings = { LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Promissum.xcodeproj/Promissum_Info.plist'; OTHER_LDFLAGS = '$(inherited)'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; };
+            name = Release;
+        };
+        __Dependency_Promissum = {
+            isa = PBXTargetDependency;
+            target = ______Target_Promissum;
+        };
+        __PBXFileRef_PromissumTestSuite_Info.plist = {
+            isa = PBXFileReference;
+            lastKnownFileType = text.plist.xml;
+            name = 'PromissumTestSuite_Info.plist';
+            path = 'Promissum.xcodeproj/PromissumTestSuite_Info.plist';
+            sourceTree = SOURCE_ROOT;
+        };
+        _______Group_PromissumTestSuite = {
+            isa = PBXGroup;
+            name = PromissumTestSuite;
+            path = 'Tests/Promissum';
+            sourceTree = '<group>';
+            children = ('__PBXFileRef_Tests/Promissum/CombinatorTests.swift', '__PBXFileRef_Tests/Promissum/DispatchOnTests.swift', '__PBXFileRef_Tests/Promissum/DispatchQueueTests.swift', '__PBXFileRef_Tests/Promissum/DispatchSynchronousTests.swift', '__PBXFileRef_Tests/Promissum/DispatchUnspecifiedTests.swift', '__PBXFileRef_Tests/Promissum/InitialErrorTests.swift', '__PBXFileRef_Tests/Promissum/InitialValueTests.swift', '__PBXFileRef_Tests/Promissum/MultipleErrorTests.swift', '__PBXFileRef_Tests/Promissum/MultipleValueTests.swift', '__PBXFileRef_Tests/Promissum/PromissumTests.swift', '__PBXFileRef_Tests/Promissum/ResolveRejectTests.swift', '__PBXFileRef_Tests/Promissum/SideEffectOrderTests.swift', '__PBXFileRef_Tests/Promissum/SourceErrorTests.swift', '__PBXFileRef_Tests/Promissum/SourceResultTests.swift', '__PBXFileRef_Tests/Promissum/SourceValueTests.swift', '__PBXFileRef_Tests/Promissum/XCTestCase+Expectation.swift', __PBXFileRef_PromissumTestSuite_Info.plist);
+        };
+        '__PBXFileRef_Tests/Promissum/CombinatorTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'CombinatorTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/DispatchOnTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'DispatchOnTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/DispatchQueueTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'DispatchQueueTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/DispatchSynchronousTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'DispatchSynchronousTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/DispatchUnspecifiedTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'DispatchUnspecifiedTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/InitialErrorTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'InitialErrorTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/InitialValueTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'InitialValueTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/MultipleErrorTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'MultipleErrorTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/MultipleValueTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'MultipleValueTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/PromissumTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'PromissumTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/ResolveRejectTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'ResolveRejectTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/SideEffectOrderTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'SideEffectOrderTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/SourceErrorTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'SourceErrorTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/SourceResultTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'SourceResultTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/SourceValueTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'SourceValueTests.swift';
+            sourceTree = '<group>';
+        };
+        '__PBXFileRef_Tests/Promissum/XCTestCase+Expectation.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            name = 'XCTestCase+Expectation.swift';
+            sourceTree = '<group>';
+        };
+        ______Target_PromissumTestSuite = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = _______Confs_PromissumTestSuite;
+            buildPhases = (CompilePhase_PromissumTestSuite, ___LinkPhase_PromissumTestSuite);
+            buildRules = ();
+            dependencies = (__Dependency_Promissum);
+            name = PromissumTestSuite;
+            productName = PromissumTestSuite;
+            productReference = _____Product_PromissumTestSuite;
+            productType = 'com.apple.product-type.bundle.unit-test';
+        };
+        _____Product_PromissumTestSuite = {
+            isa = PBXFileReference;
+            explicitFileType = 'compiled.mach-o.wrapper.cfbundle';
+            path = 'PromissumTestSuite.xctest';
+            sourceTree = BUILT_PRODUCTS_DIR;
+        };
+        CompilePhase_PromissumTestSuite = {
+            isa = PBXSourcesBuildPhase;
+            files = ('__src_cc_ref_Tests/Promissum/CombinatorTests.swift', '__src_cc_ref_Tests/Promissum/DispatchOnTests.swift', '__src_cc_ref_Tests/Promissum/DispatchQueueTests.swift', '__src_cc_ref_Tests/Promissum/DispatchSynchronousTests.swift', '__src_cc_ref_Tests/Promissum/DispatchUnspecifiedTests.swift', '__src_cc_ref_Tests/Promissum/InitialErrorTests.swift', '__src_cc_ref_Tests/Promissum/InitialValueTests.swift', '__src_cc_ref_Tests/Promissum/MultipleErrorTests.swift', '__src_cc_ref_Tests/Promissum/MultipleValueTests.swift', '__src_cc_ref_Tests/Promissum/PromissumTests.swift', '__src_cc_ref_Tests/Promissum/ResolveRejectTests.swift', '__src_cc_ref_Tests/Promissum/SideEffectOrderTests.swift', '__src_cc_ref_Tests/Promissum/SourceErrorTests.swift', '__src_cc_ref_Tests/Promissum/SourceResultTests.swift', '__src_cc_ref_Tests/Promissum/SourceValueTests.swift', '__src_cc_ref_Tests/Promissum/XCTestCase+Expectation.swift');
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        '__src_cc_ref_Tests/Promissum/CombinatorTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/CombinatorTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/DispatchOnTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/DispatchOnTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/DispatchQueueTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/DispatchQueueTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/DispatchSynchronousTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/DispatchSynchronousTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/DispatchUnspecifiedTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/DispatchUnspecifiedTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/InitialErrorTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/InitialErrorTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/InitialValueTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/InitialValueTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/MultipleErrorTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/MultipleErrorTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/MultipleValueTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/MultipleValueTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/PromissumTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/PromissumTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/ResolveRejectTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/ResolveRejectTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/SideEffectOrderTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/SideEffectOrderTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/SourceErrorTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/SourceErrorTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/SourceResultTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/SourceResultTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/SourceValueTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/SourceValueTests.swift';
+        };
+        '__src_cc_ref_Tests/Promissum/XCTestCase+Expectation.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/Promissum/XCTestCase+Expectation.swift';
+        };
+        ___LinkPhase_PromissumTestSuite = {
+            isa = PBXFrameworksBuildPhase;
+            files = (_LinkFileRef_Promissum_via_PromissumTestSuite);
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        _LinkFileRef_Promissum_via_PromissumTestSuite = {
+            isa = PBXBuildFile;
+            fileRef = _____Product_Promissum;
+        };
+        _______Confs_PromissumTestSuite = {
+            isa = XCConfigurationList;
+            buildConfigurations = (___DebugConf_PromissumTestSuite, _ReleaseConf_PromissumTestSuite);
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Debug;
+        };
+        ___DebugConf_PromissumTestSuite = {
+            isa = XCBuildConfiguration;
+            buildSettings = { SWIFT_OPTIMIZATION_LEVEL = '-Onone'; LD_RUNPATH_SEARCH_PATHS = '@loader_path/../Frameworks'; EMBEDDED_CONTENT_CONTAINS_SWIFT = 'YES'; OTHER_LDFLAGS = '$(inherited)'; INFOPLIST_FILE = 'Promissum.xcodeproj/PromissumTestSuite_Info.plist'; OTHER_SWIFT_FLAGS = '$(inherited)'; };
+            name = Debug;
+        };
+        _ReleaseConf_PromissumTestSuite = {
+            isa = XCBuildConfiguration;
+            buildSettings = { LD_RUNPATH_SEARCH_PATHS = '@loader_path/../Frameworks'; EMBEDDED_CONTENT_CONTAINS_SWIFT = 'YES'; OTHER_LDFLAGS = '$(inherited)'; INFOPLIST_FILE = 'Promissum.xcodeproj/PromissumTestSuite_Info.plist'; OTHER_SWIFT_FLAGS = '$(inherited)'; };
+            name = Release;
+        };
+        __Dependency_PromissumTestSuite = {
+            isa = PBXTargetDependency;
+            target = ______Target_PromissumTestSuite;
+        };
+        '__PBXFileRef_Promissum.xcodeproj/Configs/Project.xcconfig' = {
+            isa = PBXFileReference;
+            lastKnownFileType = text.xcconfig;
+            name = 'Project.xcconfig';
+            path = 'Promissum.xcodeproj/Configs/Project.xcconfig';
+            sourceTree = '<group>';
+        };
+        _____Configs_ = {
+            isa = PBXGroup;
+            children = ('__PBXFileRef_Promissum.xcodeproj/Configs/Project.xcconfig');
+            name = Configs;
+            sourceTree = '<group>';
+        };
+        _____Sources_ = {
+            isa = PBXGroup;
+            children = (_______Group_Promissum);
+            name = Sources;
+            sourceTree = '<group>';
+        };
+        _______Tests_ = {
+            isa = PBXGroup;
+            children = (_______Group_PromissumTestSuite);
+            name = Tests;
+            sourceTree = '<group>';
+        };
+       TestProducts_ = {
+            isa = PBXGroup;
+            children = (_____Product_PromissumTestSuite);
+            name = Tests;
+            sourceTree = '<group>';
+        };
+        ____Products_ = {
+            isa = PBXGroup;
+            children = (TestProducts_, _____Product_Promissum);
+            name = Products;
+            sourceTree = '<group>';
+        };
+        _______Debug_ = {
+            isa = XCBuildConfiguration;
+            baseConfigurationReference = '__PBXFileRef_Promissum.xcodeproj/Configs/Project.xcconfig';
+            buildSettings = {};
+            name = Debug;
+        };
+        _____Release_ = {
+            isa = XCBuildConfiguration;
+            baseConfigurationReference = '__PBXFileRef_Promissum.xcodeproj/Configs/Project.xcconfig';
+            buildSettings = {};
+            name = Release;
+        };
+        ___RootConfs_ = {
+            isa = XCConfigurationList;
+            buildConfigurations = (_______Debug_, _____Release_);
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Debug;
+        };
+    };
+}
