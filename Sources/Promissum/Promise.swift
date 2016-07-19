@@ -345,47 +345,47 @@ public struct Promise<Value> {
 
   // MARK: Error combinators
 
-  /// Return a Promise containing the results of mapping `transform` over the error of `self`.
-  @warn_unused_result(message: "Forget to call `then` or `trap`?")
-    public func mapError<NewError: ErrorProtocol>(transform: (ErrorProtocol) -> NewError) -> Promise<Value> {
-    let resultSource = PromiseSource<Value>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
+   /// Return a Promise containing the results of mapping `transform` over the error of `self`.
+   @warn_unused_result(message: "Forget to call `then` or `trap`?")
+   public func mapError<NewError: ErrorProtocol>(transform: (ErrorProtocol) -> NewError) -> Promise<Value> {
+      let resultSource = PromiseSource<Value>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
 
-    let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
-      switch result {
-      case .Value(let value):
-        resultSource.resolve(value: value)
-      case .Error(let error):
-        let transformed = transform(error)
-        resultSource.reject(error: transformed)
+      let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
+         switch result {
+         case .Value(let value):
+            resultSource.resolve(value: value)
+         case .Error(let error):
+            let transformed = transform(error)
+            resultSource.reject(error: transformed)
+         }
       }
-    }
 
-    source.addOrCallResultHandler(handler: handler)
+      source.addOrCallResultHandler(handler: handler)
 
-    return resultSource.promise
-  }
+      return resultSource.promise
+   }
 
-  /// Returns the flattened result of mapping `transform` over the error of `self`.
-  @warn_unused_result(message: "Forget to call `then` or `trap`?")
-    public func flatMapError(transform: (ErrorProtocol) -> Promise<Value>) -> Promise<Value> {
-    let resultSource = PromiseSource<Value>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
+   /// Returns the flattened result of mapping `transform` over the error of `self`.
+   @warn_unused_result(message: "Forget to call `then` or `trap`?")
+   public func flatMapError(transform: (ErrorProtocol) -> Promise<Value>) -> Promise<Value> {
+      let resultSource = PromiseSource<Value>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
 
-    let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
-      switch result {
-      case .Value(let value):
-        resultSource.resolve(value: value)
-      case .Error(let error):
-        let transformedPromise = transform(error)
-        transformedPromise
-          .then(handler: resultSource.resolve)
-          .trap(handler: resultSource.reject)
+      let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
+         switch result {
+         case .Value(let value):
+            resultSource.resolve(value: value)
+         case .Error(let error):
+            let transformedPromise = transform(error)
+            transformedPromise
+               .then(handler: resultSource.resolve)
+               .trap(handler: resultSource.reject)
+         }
       }
-    }
 
-    source.addOrCallResultHandler(handler: handler)
-
-    return resultSource.promise
-  }
+      source.addOrCallResultHandler(handler: handler)
+      
+      return resultSource.promise
+   }
 
   // MARK: Result combinators
 
