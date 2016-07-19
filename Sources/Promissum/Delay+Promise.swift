@@ -16,8 +16,8 @@ public func delay(seconds: NSTimeInterval, queue: dispatch_queue_t! = dispatch_g
 }
 
 /// Create a Promise that resolves with the specified value after the specified number of seconds.
-public func delayPromise<Value, Error>(seconds: NSTimeInterval, value: Value, queue: dispatch_queue_t! = dispatch_get_main_queue()) -> Promise<Value, Error> {
-  let source = PromiseSource<Value, Error>()
+public func delayPromise<Value>(seconds: NSTimeInterval, value: Value, queue: dispatch_queue_t! = dispatch_get_main_queue()) -> Promise<Value> {
+  let source = PromiseSource<Value>()
 
   delay(seconds: seconds, queue: queue) {
     source.resolve(value: value)
@@ -27,8 +27,8 @@ public func delayPromise<Value, Error>(seconds: NSTimeInterval, value: Value, qu
 }
 
 /// Create a Promise that rejects with the specified error after the specified number of seconds.
-public func delayErrorPromise<Value, Error>(seconds: NSTimeInterval, error: Error, queue: dispatch_queue_t! = dispatch_get_main_queue()) -> Promise<Value, Error> {
-  let source = PromiseSource<Value, Error>()
+public func delayErrorPromise<Value>(seconds: NSTimeInterval, error: ErrorProtocol, queue: dispatch_queue_t! = dispatch_get_main_queue()) -> Promise<Value> {
+  let source = PromiseSource<Value>()
 
   delay(seconds: seconds, queue: queue) {
     source.reject(error: error)
@@ -38,14 +38,14 @@ public func delayErrorPromise<Value, Error>(seconds: NSTimeInterval, error: Erro
 }
 
 /// Create a Promise that resolves after the specified number of seconds.
-public func delayPromise<Error>(seconds: NSTimeInterval, queue: dispatch_queue_t! = dispatch_get_main_queue()) -> Promise<Void, Error> {
+public func delayPromise(seconds: NSTimeInterval, queue: dispatch_queue_t! = dispatch_get_main_queue()) -> Promise<Void> {
   return delayPromise(seconds: seconds, value: (), queue: queue)
 }
 
 extension Promise {
 
   /// Return a Promise with the resolve or reject delayed by the specified number of seconds.
-  public func delay(seconds: NSTimeInterval) -> Promise<Value, Error> {
+  public func delay(seconds: NSTimeInterval) -> Promise<Value> {
     return self
       .flatMap { value in
         return delayPromise(seconds: seconds).map { value }

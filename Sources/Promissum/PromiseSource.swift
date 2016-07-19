@@ -66,14 +66,14 @@ In that case, you must manually retain the PromiseSource, or the Promise will ne
 Note that `PromiseSource.deinit` by default will log a warning when an unresolved PromiseSource is deallocated.
 
 */
-public class PromiseSource<Value, Error> {
-  typealias ResultHandler = (Result<Value, Error>) -> Void
+public class PromiseSource<Value> {
+  typealias ResultHandler = (Result<Value, ErrorProtocol>) -> Void
 
-  private var handlers: [(Result<Value, Error>) -> Void] = []
+  private var handlers: [(Result<Value, ErrorProtocol>) -> Void] = []
   internal let dispatchMethod: DispatchMethod
 
   /// The current state of the PromiseSource
-  private(set) public var state: State<Value, Error>
+  private(set) public var state: State<Value, ErrorProtocol>
 
   /// Print a warning on deinit of an unresolved PromiseSource
   public var warnUnresolvedDeinit: Bool
@@ -84,7 +84,7 @@ public class PromiseSource<Value, Error> {
     self.init(state: .Resolved(value), dispatch: .Unspecified, warnUnresolvedDeinit: false)
   }
 
-  internal convenience init(error: Error) {
+  internal convenience init(error: ErrorProtocol) {
     self.init(state: .Rejected(error), dispatch: .Unspecified, warnUnresolvedDeinit: false)
   }
 
@@ -95,7 +95,7 @@ public class PromiseSource<Value, Error> {
     self.init(state: .Unresolved, dispatch: dispatch, warnUnresolvedDeinit: warnUnresolvedDeinit)
   }
 
-  internal init(state: State<Value, Error>, dispatch: DispatchMethod, warnUnresolvedDeinit: Bool) {
+  internal init(state: State<Value, ErrorProtocol>, dispatch: DispatchMethod, warnUnresolvedDeinit: Bool) {
     self.state = state
     self.dispatchMethod = dispatch
     self.warnUnresolvedDeinit = warnUnresolvedDeinit
@@ -116,7 +116,7 @@ public class PromiseSource<Value, Error> {
   // MARK: Computed properties
 
   /// Promise related to this PromiseSource
-  public var promise: Promise<Value, Error> {
+  public var promise: Promise<Value> {
     return Promise(source: self)
   }
 
@@ -135,12 +135,12 @@ public class PromiseSource<Value, Error> {
   /// Reject an Unresolved PromiseSource with supplied error.
   ///
   /// When called on a PromiseSource that is already Resolved or Rejected, the call is ignored.
-  public func reject(error: Error) {
+  public func reject(error: ErrorProtocol) {
 
     resolveResult(result: .Error(error))
   }
 
-  internal func resolveResult(result: Result<Value, Error>) {
+  internal func resolveResult(result: Result<Value, ErrorProtocol>) {
 
     switch state {
     case .Unresolved:
@@ -152,7 +152,7 @@ public class PromiseSource<Value, Error> {
     }
   }
 
-  private func executeResultHandlers(result: Result<Value, Error>) {
+  private func executeResultHandlers(result: Result<Value, ErrorProtocol>) {
 
     // Call all previously scheduled handlers
     callHandlers(value: result, handlers: handlers, dispatchMethod: dispatchMethod)
@@ -163,7 +163,7 @@ public class PromiseSource<Value, Error> {
 
   // MARK: Adding result handlers
 
-  internal func addOrCallResultHandler(handler: (Result<Value, Error>) -> Void) {
+  internal func addOrCallResultHandler(handler: (Result<Value, ErrorProtocol>) -> Void) {
 
     switch state {
     case .Unresolved:

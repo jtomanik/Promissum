@@ -90,8 +90,8 @@ Note that it is often not needed to create a new Promise.
 If an existing Promise is available, transforming that using `map` or `flatMap` is often sufficient.
 
 */
-public struct Promise<Value, Error> {
-  internal let source: PromiseSource<Value, Error>
+public struct Promise<Value> {
+  internal let source: PromiseSource<Value>
 
 
   // MARK: Initializers
@@ -106,11 +106,11 @@ public struct Promise<Value, Error> {
   /// Initialize a rejected Promise with an error.
   ///
   /// Example: `Promise<Int, String>(error: "Oops")`
-  public init(error: Error) {
+  public init(error: ErrorProtocol) {
     self.source = PromiseSource(error: error)
   }
 
-  internal init(source: PromiseSource<Value, Error>) {
+  internal init(source: PromiseSource<Value>) {
     self.source = source
   }
 
@@ -134,7 +134,7 @@ public struct Promise<Value, Error> {
   /// Will be `nil` if Promise is Resolved or still Unresolved.
   ///
   /// In most situations it is recommended to register a handler with `trap` method instead of directly using this property.
-  public var error: Error? {
+  public var error: ErrorProtocol? {
     switch source.state {
     case .Rejected(let error):
       return error
@@ -147,7 +147,7 @@ public struct Promise<Value, Error> {
   /// Will be `nil` if Promise still Unresolved.
   ///
   /// In most situations it is recommended to register a handler with `finallyResult` method instead of directly using this property.
-  public var result: Result<Value, Error>? {
+  public var result: Result<Value, ErrorProtocol>? {
     switch source.state {
     case .Resolved(let boxed):
       return .Value(boxed)
@@ -176,9 +176,9 @@ public struct Promise<Value, Error> {
   /// The handler is synchronously called on the current thread when Promise is already Resolved.
   /// Or, when Promise is resolved later on, the handler is called synchronously on the thread where `PromiseSource.resolve` is called.
   @discardableResult
-  public func then(handler: (Value) -> Void) -> Promise<Value, Error> {
+  public func then(handler: (Value) -> Void) -> Promise<Value> {
 
-    let resultHandler: (Result<Value, Error>) -> Void = { result in
+    let resultHandler: (Result<Value, ErrorProtocol>) -> Void = { result in
       switch result {
       case .Value(let value):
         handler(value)
@@ -207,9 +207,9 @@ public struct Promise<Value, Error> {
   /// The handler is synchronously called on the current thread when Promise is already Rejected.
   /// Or, when Promise is rejected later on, the handler is called synchronously on the thread where `PromiseSource.reject` is called.
   @discardableResult
-  public func trap(handler: (Error) -> Void) -> Promise<Value, Error> {
+  public func trap(handler: (ErrorProtocol) -> Void) -> Promise<Value> {
 
-    let resultHandler: (Result<Value, Error>) -> Void = { result in
+    let resultHandler: (Result<Value, ErrorProtocol>) -> Void = { result in
       switch result {
       case .Value:
         break
@@ -240,9 +240,9 @@ public struct Promise<Value, Error> {
   /// Or, when Promise is resolved or rejected later on,
   /// the handler is called synchronously on the thread where `PromiseSource.resolve` or `PromiseSource.reject` is called.
   @discardableResult
-  public func finally(handler: () -> Void) -> Promise<Value, Error> {
+  public func finally(handler: () -> Void) -> Promise<Value> {
 
-    let resultHandler: (Result<Value, Error>) -> Void = { _ in
+    let resultHandler: (Result<Value, ErrorProtocol>) -> Void = { _ in
       handler()
     }
 
@@ -267,7 +267,7 @@ public struct Promise<Value, Error> {
   /// The handler is synchronously called on the current thread when Promise is already Resolved or Rejected.
   /// Or, when Promise is resolved or rejected later on,
   /// the handler is called synchronously on the thread where `PromiseSource.resolve` or `PromiseSource.reject` is called.
-  public func finallyResult(handler: (Result<Value, Error>) -> Void) -> Promise<Value, Error> {
+  public func finallyResult(handler: (Result<Value, ErrorProtocol>) -> Void) -> Promise<Value> {
 
     source.addOrCallResultHandler(handler: handler)
 
@@ -279,18 +279,18 @@ public struct Promise<Value, Error> {
 
   /// Returns a Promise that dispatches its handlers on the specified dispatch queue.
   @warn_unused_result(message: "Forget to call `then` or `trap`?")
-  public func dispatchOn(queue: dispatch_queue_t) -> Promise<Value, Error> {
+  public func dispatchOn(queue: dispatch_queue_t) -> Promise<Value> {
     return dispatchOn(dispatch: .OnQueue(queue))
   }
 
   /// Returns a Promise that dispatches its handlers on the main dispatch queue.
   @warn_unused_result(message: "Forget to call `then` or `trap`?")
-  public func dispatchMain() -> Promise<Value, Error> {
+  public func dispatchMain() -> Promise<Value> {
     return dispatchOn(queue: dispatch_get_main_queue())
   }
 
-  private func dispatchOn(dispatch: DispatchMethod) -> Promise<Value, Error> {
-    let resultSource = PromiseSource<Value, Error>(state: .Unresolved, dispatch: dispatch, warnUnresolvedDeinit: true)
+  private func dispatchOn(dispatch: DispatchMethod) -> Promise<Value> {
+    let resultSource = PromiseSource<Value>(state: .Unresolved, dispatch: dispatch, warnUnresolvedDeinit: true)
 
     source.addOrCallResultHandler(handler: resultSource.resolveResult)
 
@@ -302,10 +302,10 @@ public struct Promise<Value, Error> {
 
   /// Return a Promise containing the results of mapping `transform` over the value of `self`.
   @warn_unused_result(message: "Forget to call `then` or `trap`?")
-  public func map<NewValue>(transform: (Value) -> NewValue) -> Promise<NewValue, Error> {
-    let resultSource = PromiseSource<NewValue, Error>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
+  public func map<NewValue>(transform: (Value) -> NewValue) -> Promise<NewValue> {
+    let resultSource = PromiseSource<NewValue>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
 
-    let handler: (Result<Value, Error>) -> Void = { result in
+    let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
       switch result {
       case .Value(let value):
         let transformed = transform(value)
@@ -322,10 +322,10 @@ public struct Promise<Value, Error> {
 
   /// Returns the flattened result of mapping `transform` over the value of `self`.
   @warn_unused_result(message: "Forget to call `then` or `trap`?")
-  public func flatMap<NewValue>(transform: (Value) -> Promise<NewValue, Error>) -> Promise<NewValue, Error> {
-    let resultSource = PromiseSource<NewValue, Error>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
+  public func flatMap<NewValue>(transform: (Value) -> Promise<NewValue>) -> Promise<NewValue> {
+    let resultSource = PromiseSource<NewValue>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
 
-    let handler: (Result<Value, Error>) -> Void = { result in
+    let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
       switch result {
       case .Value(let value):
         let transformedPromise = transform(value)
@@ -347,10 +347,10 @@ public struct Promise<Value, Error> {
 
   /// Return a Promise containing the results of mapping `transform` over the error of `self`.
   @warn_unused_result(message: "Forget to call `then` or `trap`?")
-  public func mapError<NewError>(transform: (Error) -> NewError) -> Promise<Value, NewError> {
-    let resultSource = PromiseSource<Value, NewError>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
+    public func mapError<NewError: ErrorProtocol>(transform: (ErrorProtocol) -> NewError) -> Promise<Value> {
+    let resultSource = PromiseSource<Value>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
 
-    let handler: (Result<Value, Error>) -> Void = { result in
+    let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
       switch result {
       case .Value(let value):
         resultSource.resolve(value: value)
@@ -367,10 +367,10 @@ public struct Promise<Value, Error> {
 
   /// Returns the flattened result of mapping `transform` over the error of `self`.
   @warn_unused_result(message: "Forget to call `then` or `trap`?")
-  public func flatMapError<NewError>(transform: (Error) -> Promise<Value, NewError>) -> Promise<Value, NewError> {
-    let resultSource = PromiseSource<Value, NewError>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
+    public func flatMapError(transform: (ErrorProtocol) -> Promise<Value>) -> Promise<Value> {
+    let resultSource = PromiseSource<Value>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
 
-    let handler: (Result<Value, Error>) -> Void = { result in
+    let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
       switch result {
       case .Value(let value):
         resultSource.resolve(value: value)
@@ -391,10 +391,10 @@ public struct Promise<Value, Error> {
 
   /// Return a Promise containing the results of mapping `transform` over the result of `self`.
   @warn_unused_result(message: "Forget to call `then` or `trap`?")
-  public func mapResult<NewValue, NewError>(transform: (Result<Value, Error>) -> Result<NewValue, NewError>) -> Promise<NewValue, NewError> {
-    let resultSource = PromiseSource<NewValue, NewError>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
+    public func mapResult<NewValue, NewError: ErrorProtocol>(transform: (Result<Value, ErrorProtocol>) -> Result<NewValue, NewError>) -> Promise<NewValue> {
+    let resultSource = PromiseSource<NewValue>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
 
-    let handler: (Result<Value, Error>) -> Void = { result in
+    let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
       switch transform(result) {
       case .Value(let value):
         resultSource.resolve(value: value)
@@ -410,10 +410,10 @@ public struct Promise<Value, Error> {
 
   /// Returns the flattened result of mapping `transform` over the result of `self`.
   @warn_unused_result(message: "Forget to call `then` or `trap`?")
-  public func flatMapResult<NewValue, NewError>(transform: (Result<Value, Error>) -> Promise<NewValue, NewError>) -> Promise<NewValue, NewError> {
-    let resultSource = PromiseSource<NewValue, NewError>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
+    public func flatMapResult<NewValue>(transform: (Result<Value, ErrorProtocol>) -> Promise<NewValue>) -> Promise<NewValue> {
+    let resultSource = PromiseSource<NewValue>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
 
-    let handler: (Result<Value, Error>) -> Void = { result in
+    let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
       let transformedPromise = transform(result)
       transformedPromise
         .then(handler: resultSource.resolve)
