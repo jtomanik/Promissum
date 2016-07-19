@@ -91,7 +91,7 @@ If an existing Promise is available, transforming that using `map` or `flatMap` 
 
 */
 public struct Promise<Value, Error> {
-  private let source: PromiseSource<Value, Error>
+  internal let source: PromiseSource<Value, Error>
 
 
   // MARK: Initializers
@@ -175,6 +175,7 @@ public struct Promise<Value, Error> {
   /// ## Dispatch queue
   /// The handler is synchronously called on the current thread when Promise is already Resolved.
   /// Or, when Promise is resolved later on, the handler is called synchronously on the thread where `PromiseSource.resolve` is called.
+  @discardableResult
   public func then(handler: (Value) -> Void) -> Promise<Value, Error> {
 
     let resultHandler: (Result<Value, Error>) -> Void = { result in
@@ -205,6 +206,7 @@ public struct Promise<Value, Error> {
   /// ## Dispatch queue
   /// The handler is synchronously called on the current thread when Promise is already Rejected.
   /// Or, when Promise is rejected later on, the handler is called synchronously on the thread where `PromiseSource.reject` is called.
+  @discardableResult
   public func trap(handler: (Error) -> Void) -> Promise<Value, Error> {
 
     let resultHandler: (Result<Value, Error>) -> Void = { result in
@@ -237,6 +239,7 @@ public struct Promise<Value, Error> {
   /// The handler is synchronously called on the current thread when Promise is already Resolved or Rejected.
   /// Or, when Promise is resolved or rejected later on,
   /// the handler is called synchronously on the thread where `PromiseSource.resolve` or `PromiseSource.reject` is called.
+  @discardableResult
   public func finally(handler: () -> Void) -> Promise<Value, Error> {
 
     let resultHandler: (Result<Value, Error>) -> Void = { _ in

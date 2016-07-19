@@ -169,12 +169,3 @@ extension Promise {
     return self.mapVoid()
   }
 }
-
-extension Promise where Error : ErrorProtocol {
-
-  /// Returns a Promise where the error is casted to an ErrorProtocol.
-  @warn_unused_result(message: "Forget to call `then` or `trap`?")
-  public func mapErrorProtocol() -> Promise<Value, ErrorProtocol> {
-    return self.mapError { $0 }
-  }
-}
