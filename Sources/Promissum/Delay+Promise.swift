@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Dispatch
 
 /// Wrapper around `dispatch_after`, with a seconds parameter.
 public func delay(seconds: NSTimeInterval, queue: dispatch_queue_t! = dispatch_get_main_queue(), block: dispatch_block_t!) {
