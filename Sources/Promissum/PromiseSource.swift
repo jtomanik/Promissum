@@ -188,14 +188,20 @@ internal func callHandlers<T>(value: T, handlers: [(T) -> Void], dispatchMethod:
     switch dispatchMethod {
     case .Unspecified:
 
+      #if os(Linux)
+      dispatch_async(dispatch_get_main_queue()) {
+         handler(value)
+      }
+      #else
       if NSThread.isMainThread() {
-        handler(value)
+         handler(value)
       }
       else {
-        dispatch_async(dispatch_get_main_queue()) {
-          handler(value)
-        }
+         dispatch_async(dispatch_get_main_queue()) {
+            handler(value)
+         }
       }
+      #endif
 
     case .Synchronous:
 
