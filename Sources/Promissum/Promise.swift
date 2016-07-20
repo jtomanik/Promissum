@@ -347,7 +347,7 @@ public struct Promise<Value> {
 
    /// Return a Promise containing the results of mapping `transform` over the error of `self`.
    @warn_unused_result(message: "Forget to call `then` or `trap`?")
-   public func mapError<NewError: ErrorProtocol>(transform: (ErrorProtocol) -> NewError) -> Promise<Value> {
+   public func mapError(transform: (ErrorProtocol) -> ErrorProtocol) -> Promise<Value> {
       let resultSource = PromiseSource<Value>(state: .Unresolved, dispatch: source.dispatchMethod, warnUnresolvedDeinit: true)
 
       let handler: (Result<Value, ErrorProtocol>) -> Void = { result in
