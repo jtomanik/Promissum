@@ -35,8 +35,8 @@ public func whenBoth<A, B>(promiseA: Promise<A>, _ promiseB: Promise<B>) -> Prom
 ///
 /// When called with an empty array of promises, this returns a Resolved Promise (with an empty array value).
 @warn_unused_result(message: "Forget to call `then` or `trap`?")
-public func whenAll<Value>(promises: [Promise<Value>]) -> Promise<[Value]> {
-  let source = PromiseSource<[Value]>()
+public func whenAll<Value>(dispatch: DispatchMethod = .Unspecified, promises: [Promise<Value>]) -> Promise<[Value]> {
+  let source = PromiseSource<[Value]>(dispatch: dispatch)
   var results = promises.map { $0.value }
   var remaining = promises.count
 
@@ -73,7 +73,7 @@ public func whenAll<Value>(promises: [Promise<Value>]) -> Promise<[Value]> {
 ///
 /// If both Promises fail, the returned Promise also fails.
 @warn_unused_result(message: "Forget to call `then` or `trap`?")
-public func whenEither<Value>(promise1: Promise<Value>, _ promise2: Promise<Value>) -> Promise<Value> {
+public func whenEither<Value>(dispatch: DispatchMethod = .Unspecified, promise1: Promise<Value>, _ promise2: Promise<Value>) -> Promise<Value> {
   return whenAny(promises: [promise1, promise2])
 }
 
@@ -83,8 +83,8 @@ public func whenEither<Value>(promise1: Promise<Value>, _ promise2: Promise<Valu
 ///
 /// When called with an empty array of promises, this returns a Promise that will never resolve.
 @warn_unused_result(message: "Forget to call `then` or `trap`?")
-public func whenAny<Value>(promises: [Promise<Value>]) -> Promise<Value> {
-  let source = PromiseSource<Value>()
+public func whenAny<Value>(dispatch: DispatchMethod = .Unspecified, promises: [Promise<Value>]) -> Promise<Value> {
+  let source = PromiseSource<Value>(dispatch: dispatch)
   var remaining = promises.count
 
   for promise in promises {
@@ -112,8 +112,8 @@ public func whenAny<Value>(promises: [Promise<Value>]) -> Promise<Value> {
 ///
 /// When called with an empty array of promises, this returns a Resolved Promise.
 @warn_unused_result(message: "Forget to call `then` or `trap`?")
-public func whenAllFinalized<Value>(promises: [Promise<Value>]) -> Promise<Void> {
-  let source = PromiseSource<Void>()
+public func whenAllFinalized<Value>(dispatch: DispatchMethod = .Unspecified, promises: [Promise<Value>]) -> Promise<Void> {
+  let source = PromiseSource<Void>(dispatch: dispatch)
   var remaining = promises.count
 
   if remaining == 0 {
@@ -140,8 +140,8 @@ public func whenAllFinalized<Value>(promises: [Promise<Value>]) -> Promise<Void>
 ///
 /// When called with an empty array of promises, this returns a Promise that will never resolve.
 @warn_unused_result(message: "Forget to call `then` or `trap`?")
-public func whenAnyFinalized<Value>(promises: [Promise<Value>]) -> Promise<Void> {
-  let source = PromiseSource<Void>()
+public func whenAnyFinalized<Value>(dispatch: DispatchMethod = .Unspecified, promises: [Promise<Value>]) -> Promise<Void> {
+  let source = PromiseSource<Void>(dispatch: dispatch)
 
   for promise in promises {
 
