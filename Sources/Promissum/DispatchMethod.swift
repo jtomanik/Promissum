@@ -12,7 +12,7 @@ import Dispatch
 public enum DispatchMethod {
   case Unspecified
   case Synchronous
-  case OnQueue(dispatch_queue_t)
+  case OnQueue(DispatchQueue)
 }
 
 extension DispatchMethod: CustomStringConvertible {

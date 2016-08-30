@@ -11,7 +11,6 @@ import Foundation
 /// Flattens a nested Promise of Promise into a single Promise.
 ///
 /// The returned Promise resolves (or rejects) when the nested Promise resolves.
-@warn_unused_result(message: "Forget to call `then` or `trap`?")
 public func flatten<Value>(promise: Promise<Promise<Value>>) -> Promise<Value> {
   return promise.flatMap { $0 }
 }
@@ -22,7 +21,6 @@ public func flatten<Value>(promise: Promise<Promise<Value>>) -> Promise<Value> {
 /// The new Promise's value is of a tuple type constructed from both argument promises.
 ///
 /// If either of the two Promises fails, the returned Promise also fails.
-@warn_unused_result(message: "Forget to call `then` or `trap`?")
 public func whenBoth<A, B>(promiseA: Promise<A>, _ promiseB: Promise<B>) -> Promise<(A, B)> {
   return promiseA.flatMap { valueA in promiseB.map { valueB in (valueA, valueB) } }
 }
@@ -34,7 +32,6 @@ public func whenBoth<A, B>(promiseA: Promise<A>, _ promiseB: Promise<B>) -> Prom
 /// If any of the supplied Promises fails, the returned Promise immediately fails.
 ///
 /// When called with an empty array of promises, this returns a Resolved Promise (with an empty array value).
-@warn_unused_result(message: "Forget to call `then` or `trap`?")
 public func whenAll<Value>(dispatch: DispatchMethod = .Unspecified, promises: [Promise<Value>]) -> Promise<[Value]> {
   let source = PromiseSource<[Value]>(dispatch: dispatch)
   var results = promises.map { $0.value }
@@ -72,7 +69,6 @@ public func whenAll<Value>(dispatch: DispatchMethod = .Unspecified, promises: [P
 /// If both argument Promises are already Resolved, the first Promise's value is used.
 ///
 /// If both Promises fail, the returned Promise also fails.
-@warn_unused_result(message: "Forget to call `then` or `trap`?")
 public func whenEither<Value>(dispatch: DispatchMethod = .Unspecified, promise1: Promise<Value>, _ promise2: Promise<Value>) -> Promise<Value> {
   return whenAny(promises: [promise1, promise2])
 }
@@ -82,7 +78,6 @@ public func whenEither<Value>(dispatch: DispatchMethod = .Unspecified, promise1:
 /// If all of the supplied Promises fail, the returned Promise fails.
 ///
 /// When called with an empty array of promises, this returns a Promise that will never resolve.
-@warn_unused_result(message: "Forget to call `then` or `trap`?")
 public func whenAny<Value>(dispatch: DispatchMethod = .Unspecified, promises: [Promise<Value>]) -> Promise<Value> {
   let source = PromiseSource<Value>(dispatch: dispatch)
   var remaining = promises.count
@@ -111,7 +106,6 @@ public func whenAny<Value>(dispatch: DispatchMethod = .Unspecified, promises: [P
 /// Creates a Promise that resolves when all provided Promises finalize.
 ///
 /// When called with an empty array of promises, this returns a Resolved Promise.
-@warn_unused_result(message: "Forget to call `then` or `trap`?")
 public func whenAllFinalized<Value>(dispatch: DispatchMethod = .Unspecified, promises: [Promise<Value>]) -> Promise<Void> {
   let source = PromiseSource<Void>(dispatch: dispatch)
   var remaining = promises.count
@@ -139,7 +133,6 @@ public func whenAllFinalized<Value>(dispatch: DispatchMethod = .Unspecified, pro
 /// Creates a Promise that resolves when any of the provided Promises finalize.
 ///
 /// When called with an empty array of promises, this returns a Promise that will never resolve.
-@warn_unused_result(message: "Forget to call `then` or `trap`?")
 public func whenAnyFinalized<Value>(dispatch: DispatchMethod = .Unspecified, promises: [Promise<Value>]) -> Promise<Void> {
   let source = PromiseSource<Void>(dispatch: dispatch)
 
@@ -157,14 +150,12 @@ public func whenAnyFinalized<Value>(dispatch: DispatchMethod = .Unspecified, pro
 extension Promise {
 
   /// Returns a Promise where the value information is thrown away.
-  @warn_unused_result(message: "Forget to call `then` or `trap`?")
   public func mapVoid() -> Promise<Void> {
     return self.map { _ in }
   }
 
   /// Returns a Promise where the value information is thrown away.
   @available(*, deprecated, renamed: "mapVoid")
-  @warn_unused_result(message: "Forget to call `then` or `trap`?")
   public func void() -> Promise<Void> {
     return self.mapVoid()
   }
